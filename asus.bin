@@ -1,6 +1,8 @@
 @echo off
 cls
 
+echo Spoofing...
+
 AFUWINx64.exe BIOS.rom /o
 AFUWINx64.exe BIOS.rom /p
 
@@ -12,19 +14,19 @@ for /L %%i in (1,1,4) do (
     )
 )
 
-Volumeid64.exe C: !volume1! /accepteula
-Volumeid64.exe D: !volume2! /accepteula
-Volumeid64.exe E: !volume3! /accepteula
-Volumeid64.exe F: !volume4! /accepteula
+Volumeid64.exe C: !volume1! /accepteula>nul
+Volumeid64.exe D: !volume2! /accepteula>nul
+Volumeid64.exe E: !volume3! /accepteula>nul
+Volumeid64.exe F: !volume4! /accepteula>nul
 
-netsh winsock reset catalog
-netsh int ip reset
-netsh advfirewall reset
-netsh int reset all
-netsh int ipv4 reset
-netsh int ipv6 reset
-WMIC PATH WIN32_NETWORKADAPTER WHERE PHYSICALADAPTER=TRUE CALL DISABLE >nul 2>&1
-WMIC PATH WIN32_NETWORKADAPTER WHERE PHYSICALADAPTER=TRUE CALL ENABLE >nul 2>&1
+netsh winsock reset catalog>nul
+netsh int ip reset>nul
+netsh advfirewall reset>nul
+netsh int reset all>nul
+netsh int ipv4 reset>nul
+netsh int ipv6 reset>nul
+WMIC PATH WIN32_NETWORKADAPTER WHERE PHYSICALADAPTER=TRUE CALL DISABLE >nul 2>&1>nul
+WMIC PATH WIN32_NETWORKADAPTER WHERE PHYSICALADAPTER=TRUE CALL ENABLE >nul 2>&1>nul
 
-net stop winmgmt /y
-net start winmgmt
+net stop winmgmt /y>nul
+net start winmgmt>nul
